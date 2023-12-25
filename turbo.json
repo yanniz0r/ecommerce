@@ -1,0 +1,12 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "pipeline": {
+    "generate": {
+      "cache": true
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    }
+  }
+}

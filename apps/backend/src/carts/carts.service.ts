@@ -4,6 +4,7 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
+import { eq, and } from 'drizzle-orm';
 import { DrizzleService } from 'src/drizzle/drizzle.service';
 import { carts } from 'src/drizzle/models/cart.model';
 import { lineItems } from 'src/drizzle/models/line-item.model';
@@ -61,6 +62,16 @@ export class CartsService {
       quantity,
       productPrice,
     });
+  }
+
+  /**
+   * Removes a line item from a cart
+   */
+  async removeLineItemFromCart(cartId: number, lineItemId: number) {
+    await this.drizzleService
+      .getDb()
+      .delete(lineItems)
+      .where(and(eq(lineItems.id, lineItemId), eq(lineItems.cartId, cartId)));
   }
 
   get cartsTable() {

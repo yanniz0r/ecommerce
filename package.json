@@ -3,7 +3,16 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "private": true,
   "dependencies": {
     "turbo": "^1.11.2"
+  },
+  "workspaces": [
+    "./apps/*",
+    "./packages/*"
+  ],
+  "scripts": {
+    "generate": "turbo run generate",
+    "dev": "turbo run dev"
   }
 }

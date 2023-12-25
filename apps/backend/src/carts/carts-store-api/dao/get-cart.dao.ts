@@ -4,21 +4,21 @@ import { LineItem } from 'src/drizzle/models/line-item.model';
 import { Product } from 'src/drizzle/models/products.model';
 
 type CartData = Pick<Cart, 'id'> & {
-  lineItems: (Pick<LineItem, 'quantity'> & {
+  lineItems: (Pick<LineItem, 'id' | 'quantity'> & {
     product: Pick<Product, 'id' | 'name' | 'price' | 'currencyIsoCode'>;
   })[];
 };
 
 class GetCartLineItemProductDao {
   constructor(product: CartData['lineItems'][number]['product']) {
-    this.id = `product-${product.id}`;
+    this.id = product.id;
     this.name = product.name;
     this.price = product.price;
     this.currency = product.currencyIsoCode;
   }
 
   @ApiProperty()
-  id: string;
+  id: number;
 
   @ApiProperty()
   name: string;
@@ -32,9 +32,13 @@ class GetCartLineItemProductDao {
 
 class GetCartLineItemDao {
   constructor(lineItem: CartData['lineItems'][number]) {
+    this.id = lineItem.id;
     this.quantity = lineItem.quantity;
     this.product = new GetCartLineItemProductDao(lineItem.product);
   }
+
+  @ApiProperty()
+  id: number;
 
   @ApiProperty()
   quantity: number;
@@ -45,7 +49,7 @@ class GetCartLineItemDao {
 
 export class GetCartDao {
   constructor(cart: CartData, totalPrice: number) {
-    this.id = `cart-${cart.id}`;
+    this.id = cart.id;
     this.lineItems = cart.lineItems.map(
       (lineItem) => new GetCartLineItemDao(lineItem),
     );
@@ -53,7 +57,7 @@ export class GetCartDao {
   }
 
   @ApiProperty()
-  id: string;
+  id: number;
 
   @ApiProperty({ isArray: true, type: GetCartLineItemDao })
   lineItems: GetCartLineItemDao[];

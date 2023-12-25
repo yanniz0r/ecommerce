@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 export class InitCartDao {
-  constructor(id: string, authToken: string) {
+  constructor(id: number, authToken: string) {
     this.id = id;
     this.authToken = authToken;
   }
@@ -9,7 +9,7 @@ export class InitCartDao {
   @ApiProperty({
     description: 'The id of the cart for further access and manipulation',
   })
-  id: string;
+  id: number;
 
   @ApiProperty({
     description: 'The auth token to authenticate each cart request',

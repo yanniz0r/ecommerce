@@ -5,7 +5,7 @@ type ProductData = Pick<Product, 'name' | 'id' | 'price' | 'currencyIsoCode'>;
 
 export class ListProductsProductDao {
   constructor(product: ProductData) {
-    this.id = `product-${product.id}`;
+    this.id = product.id;
     this.name = product.name;
     this.price = product.price;
     this.currency = product.currencyIsoCode;
@@ -22,7 +22,7 @@ export class ListProductsProductDao {
   public price: number;
 
   @ApiProperty()
-  public id: string;
+  public id: number;
 
   @ApiProperty()
   public name: string;

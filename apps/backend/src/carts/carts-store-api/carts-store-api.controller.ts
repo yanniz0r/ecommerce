@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Inject, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Inject,
+  Param,
+  Post,
+  Delete,
+} from '@nestjs/common';
 import { AddLineItemDto } from './dto/add-line-item.dto';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { GetCartDao } from './dao/get-cart.dao';
@@ -20,8 +28,8 @@ export class CartsStoreApiController {
   })
   async createCart() {
     const authToken = randomUUID(); // TODO this should be part of the carts service
-    const id = this.cartsService.initCart();
-    return new InitCartDao(String(id), authToken);
+    const id = await this.cartsService.initCart();
+    return new InitCartDao(id, authToken);
   }
 
   @Get('/:cartId')
@@ -34,6 +42,7 @@ export class CartsStoreApiController {
       with: {
         lineItems: {
           columns: {
+            id: true,
             quantity: true,
           },
           with: {
@@ -77,6 +86,7 @@ export class CartsStoreApiController {
       with: {
         lineItems: {
           columns: {
+            id: true,
             quantity: true,
           },
           with: {
@@ -99,5 +109,14 @@ export class CartsStoreApiController {
     );
 
     return new GetCartDao(cart, totalPrice);
+  }
+
+  @Delete('/:cartId/line-items/:lineItemId')
+  async deleteItemFromCart(
+    @Param('cartId') cartId: number,
+    @Param('lineItemId') lineItemId: number,
+  ) {
+    await this.cartsService.assertCartNotOrdered(cartId);
+    await this.cartsService.removeLineItemFromCart(cartId, lineItemId);
   }
 }
