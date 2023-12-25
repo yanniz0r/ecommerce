@@ -54,6 +54,10 @@ export class GetCartDao {
       (lineItem) => new GetCartLineItemDao(lineItem),
     );
     this.totalPrice = totalPrice;
+    this.totalItems = cart.lineItems.reduce(
+      (acc, lineItem) => acc + lineItem.quantity,
+      0,
+    );
   }
 
   @ApiProperty()
@@ -61,6 +65,9 @@ export class GetCartDao {
 
   @ApiProperty({ isArray: true, type: GetCartLineItemDao })
   lineItems: GetCartLineItemDao[];
+
+  @ApiProperty()
+  totalItems: number;
 
   @ApiProperty()
   totalPrice: number;

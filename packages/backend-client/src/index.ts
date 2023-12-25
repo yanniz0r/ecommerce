@@ -37,6 +37,7 @@ export type GetCartLineItemDao = {
 export type GetCartDao = {
     id: number;
     lineItems: GetCartLineItemDao[];
+    totalItems: number;
     totalPrice: number;
 };
 export type AddLineItemDto = {
