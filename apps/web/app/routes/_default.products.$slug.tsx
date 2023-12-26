@@ -3,6 +3,7 @@ import { useLoaderData, useRevalidator } from "@remix-run/react";
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { cartsStoreApiControllerAddItemToCart, storeGetProduct } from "@ecommerce/backend-client";
+import { formatPrice } from "~/modules/price/format-price";
 
 export async function loader({ params }: LoaderFunctionArgs) {
   console.log(params)
@@ -30,16 +31,23 @@ export default function ProductsDetailPage() {
       })
     }
   })
-  return <div className="mx-auto max-w-screen-lg">
+  return <div className="mx-auto max-w-screen-lg pt-4">
     {addToCartMutation.isSuccess &&
-      <div className="bg-emerald-400 text-emerald-50 px-4 py-2 rounded">Added to cart!</div>
+      <div className="bg-emerald-400 text-emerald-50 px-4 py-2 rounded mb-4">Added to cart!</div>
     }
-    <h1>{product.name}</h1>
-    <p>{product.price}</p>
-    <input type="number" value={quantity} onChange={e => setQuantity(parseInt(e.target.value, 10))} />
-    <button onClick={async () => {
-      await addToCartMutation.mutateAsync()
-      revalidator.revalidate()
-    }}>Add to cart</button>
+    <div className="grid grid-cols-2 gap-4 items-center">
+      <img src={product.imageUrl} alt={product.name} className="rounded" />
+      <div className="flex flex-col gap-4">
+        <h1 className="text-4xl tracking-tighter font-semibold">{product.name}</h1>
+        <p>{formatPrice(product.price, product.currency)}</p>
+        <div className="flex gap-2">
+          <input type="number" value={quantity} onChange={e => setQuantity(parseInt(e.target.value, 10))} className="border-2 rounded px-1.5 w-14" />
+          <button className="bg-slate-900 rounded text-slate-200 px-2" onClick={async () => {
+            await addToCartMutation.mutateAsync()
+            revalidator.revalidate()
+          }}>Add to cart</button>
+        </div>
+      </div>
+    </div>
   </div>
 }

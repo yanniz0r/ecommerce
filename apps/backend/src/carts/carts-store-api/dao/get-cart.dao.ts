@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Cart } from 'src/drizzle/models/cart.model';
 import { LineItem } from 'src/drizzle/models/line-item.model';
-import { Product } from 'src/drizzle/models/products.model';
+import { Product } from 'src/drizzle/models/product.model';
 
 type CartData = Pick<Cart, 'id'> & {
   lineItems: (Pick<LineItem, 'id' | 'quantity'> & {
@@ -35,6 +35,7 @@ class GetCartLineItemDao {
     this.id = lineItem.id;
     this.quantity = lineItem.quantity;
     this.product = new GetCartLineItemProductDao(lineItem.product);
+    this.subtotal = lineItem.quantity * lineItem.product.price;
   }
 
   @ApiProperty()
@@ -42,6 +43,9 @@ class GetCartLineItemDao {
 
   @ApiProperty()
   quantity: number;
+
+  @ApiProperty()
+  subtotal: number;
 
   @ApiProperty({ type: GetCartLineItemProductDao })
   product: GetCartLineItemProductDao;

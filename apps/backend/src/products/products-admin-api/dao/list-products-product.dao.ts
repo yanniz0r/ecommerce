@@ -1,7 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Product } from '../../../drizzle/models/products.model';
+import { Product } from '../../../drizzle/models/product.model';
 
-type ProductData = Pick<Product, 'name' | 'id' | 'price' | 'currencyIsoCode'>;
+type ProductData = Pick<
+  Product,
+  'name' | 'id' | 'price' | 'currencyIsoCode' | 'imageUrl'
+>;
 
 export class ListProductsProductDao {
   constructor(product: ProductData) {
@@ -9,6 +12,7 @@ export class ListProductsProductDao {
     this.name = product.name;
     this.price = product.price;
     this.currency = product.currencyIsoCode;
+    this.imageUrl = product.imageUrl;
   }
 
   static fromArray(products: ProductData[]) {
@@ -26,4 +30,7 @@ export class ListProductsProductDao {
 
   @ApiProperty()
   public name: string;
+
+  @ApiProperty()
+  public imageUrl: string;
 }

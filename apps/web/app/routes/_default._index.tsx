@@ -1,6 +1,7 @@
 import type { MetaFunction } from "@remix-run/node";
 import { Link, json, useLoaderData } from "@remix-run/react";
 import { storeListProducts } from "@ecommerce/backend-client";
+import { formatPrice } from "~/modules/price/format-price";
 
 export const meta: MetaFunction = () => {
   return [
@@ -19,16 +20,21 @@ export async function loader() {
 export default function Index() {
   const { products } = useLoaderData<typeof loader>();
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
-      <h1>Welcome to Remix</h1>
-      <ul>
+    <div className="mx-auto max-w-screen-lg pt-4">
+      <ul className="grid grid-cols-4 gap-2">
         {products.map(product => (
           <li key={product.id}>
             <Link
               to={`/products/${product.id}`}
               rel="noreferrer"
             >
-              {product.name}
+              <div className="rounded overflow-hidden shadow" >
+                <img src={product.imageUrl} alt={product.name} />
+                <div className="p-4">
+                  <h2 className="font-semibold">{product.name}</h2>
+                  <small>{formatPrice(product.price, product.currency)}</small>
+                </div>
+              </div>
             </Link>
           </li>
         ))}

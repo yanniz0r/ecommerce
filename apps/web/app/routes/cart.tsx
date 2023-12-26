@@ -16,14 +16,23 @@ export default function CartPage() {
 
   return <div>
     <h1>Cart</h1>
-    <ul>
-      {cart.lineItems.map(item => (
-        <li key={item.product.id}>
-          <Link to={`/products/${item.product.id}`}>{item.product.name}</Link> x {item.quantity}
-          <RemoveLineItemButton cartId={2} lineItemId={item.id} onRemoved={revalidator.revalidate} />
-        </li>
-      ))}
-    </ul>
+    <table>
+      <tbody className="divide-y">
+        {cart.lineItems.map(item => (
+          <tr key={item.id}>
+            <td className="py-2 px-2.5">
+              <Link to={`/products/${item.product.id}`}>{item.product.name}</Link>
+            </td>
+            <td className="py-2 px-2.5">
+              {item.quantity}
+            </td>
+            <td className="py-2 px-2.5">
+              <RemoveLineItemButton cartId={2} lineItemId={item.id} onRemoved={revalidator.revalidate} />
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
     <p>{cart.totalPrice / 100}€</p>
   </div>
 }

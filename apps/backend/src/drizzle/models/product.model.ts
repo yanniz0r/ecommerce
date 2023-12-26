@@ -14,6 +14,7 @@ export const products = sqliteTable('products', {
       onDelete: 'cascade',
     })
     .notNull(),
+  imageUrl: text('image_url'),
 });
 
 export const productsRelations = relations(products, ({ one }) => {

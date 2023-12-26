@@ -16,6 +16,7 @@ export type ListProductsProductDao = {
     price: number;
     id: number;
     name: string;
+    imageUrl: string;
 };
 export type InitCartDao = {
     /** The id of the cart for further access and manipulation */

@@ -25,6 +25,7 @@ export class ProductsStoreApiController {
         name: true,
         price: true,
         currencyIsoCode: true,
+        imageUrl: true,
       },
     });
     return ListProductsProductDao.fromArray(products);
@@ -44,6 +45,7 @@ export class ProductsStoreApiController {
         name: true,
         price: true,
         currencyIsoCode: true,
+        imageUrl: true,
       },
       where: (product, { eq }) => eq(product.id, productId),
     });

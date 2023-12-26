@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { drizzle } from 'drizzle-orm/libsql';
 // import { drizzle } from 'drizzle-orm/postgres-js';
 import { Client, createClient } from '@libsql/client';
-import * as productsSchema from './models/products.model';
+import * as productsSchema from './models/product.model';
 import * as currenciesSchema from './models/currencies.model';
 import * as cartSchema from './models/cart.model';
 import * as lineItemSchema from './models/line-item.model';

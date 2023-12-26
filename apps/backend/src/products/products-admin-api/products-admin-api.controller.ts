@@ -23,6 +23,7 @@ export class ProductsAdminApiController {
         name: true,
         price: true,
         currencyIsoCode: true,
+        imageUrl: true,
       },
     });
     return ListProductsProductDao.fromArray(products);
