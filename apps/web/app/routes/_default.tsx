@@ -1,6 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
 import { Link, json, useLoaderData, Outlet } from "@remix-run/react";
-import { cartsStoreApiControllerGetCart, storeListProducts } from "@ecommerce/backend-client";
+import { backendClient } from "~/modules/backend-client";
 
 export const meta: MetaFunction = () => {
   return [
@@ -10,9 +10,7 @@ export const meta: MetaFunction = () => {
 };
 
 export async function loader() {
-  const cart = await cartsStoreApiControllerGetCart(2, {
-    baseUrl: "http://localhost:3000",
-  })
+  const cart = await backendClient.storeGetCart(2);
   return json({ cart: cart.data });
 }
 

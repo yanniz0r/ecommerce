@@ -2,16 +2,13 @@ import { LoaderFunctionArgs, json } from "@remix-run/node";
 import { useLoaderData, useRevalidator } from "@remix-run/react";
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
-import { cartsStoreApiControllerAddItemToCart, storeGetProduct } from "@ecommerce/backend-client";
+import { backendClient } from "~/modules/backend-client";
 import { formatPrice } from "~/modules/price/format-price";
 
 export async function loader({ params }: LoaderFunctionArgs) {
   console.log(params)
-  const product = await storeGetProduct(
+  const product = await backendClient.storeGetProduct(
     parseInt(params.slug!, 10),
-    {
-      baseUrl: "http://localhost:3000",
-    }
   )
   return json(product.data)
 }
@@ -23,11 +20,9 @@ export default function ProductsDetailPage() {
   const [quantity, setQuantity] = useState(1)
   const addToCartMutation = useMutation({
     async mutationFn() {
-      cartsStoreApiControllerAddItemToCart(2, {
+      backendClient.storeAddLineItem(2, {
         productId: 1,
         quantity,
-      }, {
-        baseUrl: "http://localhost:3000",
       })
     }
   })

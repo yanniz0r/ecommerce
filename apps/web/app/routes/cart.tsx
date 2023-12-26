@@ -1,12 +1,10 @@
 import { json } from "@remix-run/node"
 import { Link, useLoaderData, useRevalidator } from "@remix-run/react"
-import { cartsStoreApiControllerGetCart } from "@ecommerce/backend-client"
 import { RemoveLineItemButton } from "~/modules/cart/remove-line-item-button"
+import { backendClient } from "~/modules/backend-client"
 
 export async function loader() {
-  const cart = await cartsStoreApiControllerGetCart(2, {
-    baseUrl: "http://localhost:3000",
-  })
+  const cart = await backendClient.storeGetCart(2)
   return json(cart.data)
 }
 

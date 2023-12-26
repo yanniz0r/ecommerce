@@ -5,7 +5,8 @@ import {
   Param,
   Post,
 } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { getApiOperationId } from 'src/common/get-api-operation-id';
 import { DrizzleService } from 'src/drizzle/drizzle.service';
 import { orders } from 'src/drizzle/models/order.model';
 
@@ -18,6 +19,13 @@ export class OrderStoreApiController {
   ) {}
 
   @Post()
+  @ApiOperation({
+    operationId: getApiOperationId({
+      apiScope: 'store',
+      verb: 'create',
+      noun: 'cartOrder',
+    }),
+  })
   async createOrder(@Param('cartId') cartId: number) {
     const cart = await this.drizzleService.getDb().query.carts.findFirst({
       with: {

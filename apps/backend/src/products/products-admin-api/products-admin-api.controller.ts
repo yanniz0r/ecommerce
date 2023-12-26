@@ -1,7 +1,8 @@
 import { Controller, Get, Inject } from '@nestjs/common';
 import { DrizzleService } from 'src/drizzle/drizzle.service';
-import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { ListProductsProductDao } from './dao/list-products-product.dao';
+import { getApiOperationId } from 'src/common/get-api-operation-id';
 
 @Controller('/api/admin/products')
 @ApiTags('admin', 'products')
@@ -15,6 +16,13 @@ export class ProductsAdminApiController {
   @ApiOkResponse({
     isArray: true,
     type: ListProductsProductDao,
+  })
+  @ApiOperation({
+    operationId: getApiOperationId({
+      apiScope: 'admin',
+      verb: 'list',
+      noun: 'products',
+    }),
   })
   public async listProducts() {
     const products = await this.drizzleService.getDb().query.products.findMany({

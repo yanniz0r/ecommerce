@@ -1,6 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
 import { Link, json, useLoaderData } from "@remix-run/react";
-import { storeListProducts } from "@ecommerce/backend-client";
+import { backendClient } from "~/modules/backend-client";
 import { formatPrice } from "~/modules/price/format-price";
 
 export const meta: MetaFunction = () => {
@@ -11,9 +11,7 @@ export const meta: MetaFunction = () => {
 };
 
 export async function loader() {
-  const products = await storeListProducts({
-    baseUrl: "http://localhost:3000",
-  })
+  const products = await backendClient.storeListProducts()
   return json({ products: products.data });
 }
 

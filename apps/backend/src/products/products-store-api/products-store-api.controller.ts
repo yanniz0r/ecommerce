@@ -2,6 +2,7 @@ import { Controller, Get, Inject, Param } from '@nestjs/common';
 import { ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { DrizzleService } from 'src/drizzle/drizzle.service';
 import { ListProductsProductDao } from '../products-admin-api/dao/list-products-product.dao';
+import { getApiOperationId } from 'src/common/get-api-operation-id';
 
 @Controller('/api/store/products')
 export class ProductsStoreApiController {
@@ -16,7 +17,11 @@ export class ProductsStoreApiController {
     type: ListProductsProductDao,
   })
   @ApiOperation({
-    operationId: 'storeListProducts',
+    operationId: getApiOperationId({
+      apiScope: 'store',
+      verb: 'list',
+      noun: 'products',
+    }),
   })
   public async listProducts() {
     const products = await this.drizzleService.getDb().query.products.findMany({
@@ -36,7 +41,11 @@ export class ProductsStoreApiController {
     type: ListProductsProductDao,
   })
   @ApiOperation({
-    operationId: 'storeGetProduct',
+    operationId: getApiOperationId({
+      apiScope: 'store',
+      verb: 'get',
+      noun: 'product',
+    }),
   })
   public async getProduct(@Param('productId') productId: number) {
     const product = await this.drizzleService.getDb().query.products.findFirst({

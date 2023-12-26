@@ -8,7 +8,7 @@
     "oazapfts": "^4.12.0"
   },
   "scripts": {
-    "generate": "oazapfts http://localhost:3000/api-yaml > src/index.ts",
+    "generate": "oazapfts http://localhost:3000/api-yaml > src/open-api-operations.ts",
     "dev": "tsc -w"
   },
   "devDependencies": {

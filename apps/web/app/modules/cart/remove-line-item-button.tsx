@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query"
 import { FC } from "react"
-import { cartsStoreApiControllerDeleteItemFromCart } from "@ecommerce/backend-client"
+import { backendClient } from "../backend-client"
 
 interface RemoveLineItemButtonProps {
   cartId: number
@@ -11,12 +11,9 @@ interface RemoveLineItemButtonProps {
 export const RemoveLineItemButton: FC<RemoveLineItemButtonProps> = (props) => {
   const removeLineItemMutation = useMutation({
     async mutationFn() {
-      await cartsStoreApiControllerDeleteItemFromCart(
+      await backendClient.storeDeleteCartLineItem(
         props.cartId,
         props.lineItemId,
-        {
-          baseUrl: "http://localhost:3000",
-        }
       )
     }
   })
