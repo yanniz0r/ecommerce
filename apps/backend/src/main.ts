@@ -9,8 +9,7 @@ async function bootstrap() {
     .setTitle('Ecommerc')
     .setDescription('The cats API description')
     .setVersion('1.0')
-    .addTag('store')
-    .addTag('admin')
+    .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);

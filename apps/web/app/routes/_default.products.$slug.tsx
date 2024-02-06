@@ -34,7 +34,7 @@ export default function ProductsDetailPage() {
       <img src={product.imageUrl} alt={product.name} className="rounded" />
       <div className="flex flex-col gap-4">
         <h1 className="text-4xl tracking-tighter font-semibold">{product.name}</h1>
-        <p>{formatPrice(product.price, product.currency)}</p>
+        <p>{formatPrice(product.price, "€")}</p>
         <div className="flex gap-2">
           <input type="number" value={quantity} onChange={e => setQuantity(parseInt(e.target.value, 10))} className="border-2 rounded px-1.5 w-14" />
           <button className="bg-slate-900 rounded text-slate-200 px-2" onClick={async () => {

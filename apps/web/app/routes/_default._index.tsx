@@ -30,7 +30,7 @@ export default function Index() {
                 <img src={product.imageUrl} alt={product.name} />
                 <div className="p-4">
                   <h2 className="font-semibold">{product.name}</h2>
-                  <small>{formatPrice(product.price, product.currency)}</small>
+                  <small>{formatPrice(product.price, "€")}</small>
                 </div>
               </div>
             </Link>

@@ -29,7 +29,6 @@ export class ProductsStoreApiController {
         id: true,
         name: true,
         price: true,
-        currencyIsoCode: true,
         imageUrl: true,
       },
     });
@@ -53,7 +52,6 @@ export class ProductsStoreApiController {
         id: true,
         name: true,
         price: true,
-        currencyIsoCode: true,
         imageUrl: true,
       },
       where: (product, { eq }) => eq(product.id, productId),

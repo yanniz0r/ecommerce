@@ -3,19 +3,19 @@ import { drizzle } from 'drizzle-orm/libsql';
 // import { drizzle } from 'drizzle-orm/postgres-js';
 import { Client, createClient } from '@libsql/client';
 import * as productsSchema from './models/product.model';
-import * as currenciesSchema from './models/currencies.model';
 import * as cartSchema from './models/cart.model';
 import * as lineItemSchema from './models/line-item.model';
 import * as orderSchema from './models/order.model';
+import * as customerSchema from './models/customer.model';
 
 function initializeDrizzle(client: Client) {
   const db = drizzle(client, {
     schema: {
       ...productsSchema,
-      ...currenciesSchema,
       ...cartSchema,
       ...lineItemSchema,
       ...orderSchema,
+      ...customerSchema,
     } as const,
     logger: true,
   });

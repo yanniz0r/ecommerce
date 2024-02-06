@@ -1,17 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Product } from '../../../drizzle/models/product.model';
 
-type ProductData = Pick<
-  Product,
-  'name' | 'id' | 'price' | 'currencyIsoCode' | 'imageUrl'
->;
+type ProductData = Pick<Product, 'name' | 'id' | 'price' | 'imageUrl'>;
 
 export class ListProductsProductDao {
   constructor(product: ProductData) {
     this.id = product.id;
     this.name = product.name;
     this.price = product.price;
-    this.currency = product.currencyIsoCode;
     this.imageUrl = product.imageUrl;
   }
 

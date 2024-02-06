@@ -51,7 +51,6 @@ export class CartsService {
       where: (product, { eq }) => eq(product.id, productId),
       columns: {
         price: true,
-        currencyIsoCode: true,
       },
     });
     if (!product) throw new NotFoundException('Product not found');

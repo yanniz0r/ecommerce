@@ -5,7 +5,7 @@ import { Product } from 'src/drizzle/models/product.model';
 
 type CartData = Pick<Cart, 'id'> & {
   lineItems: (Pick<LineItem, 'id' | 'quantity'> & {
-    product: Pick<Product, 'id' | 'name' | 'price' | 'currencyIsoCode'>;
+    product: Pick<Product, 'id' | 'name' | 'price'>;
   })[];
 };
 
@@ -14,7 +14,6 @@ class GetCartLineItemProductDao {
     this.id = product.id;
     this.name = product.name;
     this.price = product.price;
-    this.currency = product.currencyIsoCode;
   }
 
   @ApiProperty()

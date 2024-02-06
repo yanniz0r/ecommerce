@@ -1,6 +1,6 @@
 interface GetApiOperationIdParams {
   apiScope: 'admin' | 'store';
-  verb: 'list' | 'get' | 'create' | 'update' | 'delete';
+  verb: 'list' | 'get' | 'create' | 'update' | 'delete' | 'login' | 'register';
   noun: string;
 }
 

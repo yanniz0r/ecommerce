@@ -1,6 +1,7 @@
 import type { Config } from 'drizzle-kit';
 export default {
   schema: [
+    './src/drizzle/models/customer.model.ts',
     './src/drizzle/models/product.model.ts',
     './src/drizzle/models/currencies.model.ts',
     './src/drizzle/models/cart.model.ts',

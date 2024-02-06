@@ -5,36 +5,8 @@
     {
       "idx": 0,
       "version": "5",
-      "when": 1703353491407,
-      "tag": "0000_dazzling_black_bird",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "5",
-      "when": 1703354068155,
-      "tag": "0001_sleepy_tenebrous",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "5",
-      "when": 1703354602878,
-      "tag": "0002_narrow_prodigy",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "5",
-      "when": 1703360645650,
-      "tag": "0003_parched_tyrannus",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "5",
-      "when": 1703509038040,
-      "tag": "0004_curved_ravenous",
+      "when": 1703596042472,
+      "tag": "0000_woozy_doctor_octopus",
       "breakpoints": true
     }
   ]

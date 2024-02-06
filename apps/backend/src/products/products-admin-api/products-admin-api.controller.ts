@@ -30,7 +30,6 @@ export class ProductsAdminApiController {
         id: true,
         name: true,
         price: true,
-        currencyIsoCode: true,
         imageUrl: true,
       },
     });
